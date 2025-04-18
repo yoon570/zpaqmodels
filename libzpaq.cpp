@@ -2481,8 +2481,13 @@ std::vector <float> Encoder::compress(int c) {
       for (int i=7; i>=0; --i) {
         int y=c>>i&1;
         #ifdef NOJIT
+        // std::tuple<int, std::vector<int>> retdata = pr.predict();
+        // int p = std::get<0>(retdata);
+
         std::tuple<int, std::vector<int>> retdata = pr.predict();
-        int p = std::get<0>(retdata);
+        int prob15 = std::get<0>(retdata);
+        int p = prob15 * 2 + 1;
+
         std::vector<int> predictions = std::get<1>(retdata);
         // Iterate through, divide by 32768
         // Calculate theoretical CR
