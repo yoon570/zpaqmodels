@@ -2456,12 +2456,9 @@ std::vector<float> calculate_csize(std::vector<int> probabilities, int y)
   std::vector<float> csize = {};
   for (int i = 0; i < probabilities.size(); ++i)
   {
-    float prob = (float)probabilities[i] /  float(32768);
-    if (prob < 0.5 && y == 1 || prob <= 0.5 && y == 0) // Problematic line..
-    {
-      prob = 1 - prob;
-    } 
-    float bits2encode = -1 * std::log2(prob);
+    float p = (float)(probabilities[i] + 1);
+    float prob = p / 32768.0;
+    float bits2encode = -log2(y ? prob : (1.0 - prob));
     csize.push_back(bits2encode);
   }
 
