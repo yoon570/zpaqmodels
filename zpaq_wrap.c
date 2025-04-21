@@ -169,8 +169,8 @@ int main(int argc, char* argv[]) {
         for (int i = 0; i < 5; i++) {
             int chunksize = chunksize_map[i];
 
-            printf("==> %s: Starting compression at chunk size %d bytes\n", input_file, chunksize);
-            fprintf(results, "==> %s: Starting compression at chunk size %d bytes\n", input_file, chunksize);
+            printf("%sm chunksize %d bytes\n", input_file, chunksize);
+            fprintf(results, "%sm chunksize %d bytes\n", input_file, chunksize);
             
             long effective_size = 0;
             long compressed_size = compress_and_measure(input_file, chunksize, &effective_size);
@@ -179,10 +179,10 @@ int main(int argc, char* argv[]) {
                 float raw_cr = regsize / (float)compressed_size;
                 float eff_cr = effective_size / (float)compressed_size;
 
-                printf("%s buffsz %d: Raw CR = %.2f, Effective CR = %.2f\n",
+                printf("%s buffsz %d, Raw CR, %.2f, Effective CR, %.2f\n",
                     input_file, chunksize, raw_cr, eff_cr);
 
-                fprintf(results, "%s buffsz %d: Raw CR = %.2f, Effective CR = %.2f\n",
+                fprintf(results, "%s buffsz %d, Raw CR, %.2f, Effective CR, %.2f\n",
                     input_file, chunksize, raw_cr, eff_cr);
             } else {
                 printf("%s buffsz %d: Compression failed or zero compressed size.\n",
