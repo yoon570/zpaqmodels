@@ -168,9 +168,6 @@ int main(int argc, char* argv[]) {
 
         for (int i = 0; i < 5; i++) {
             int chunksize = chunksize_map[i];
-
-            printf("%sm chunksize %d bytes\n", input_file, chunksize);
-            fprintf(results, "%sm chunksize %d bytes\n", input_file, chunksize);
             
             long effective_size = 0;
             long compressed_size = compress_and_measure(input_file, chunksize, &effective_size);
